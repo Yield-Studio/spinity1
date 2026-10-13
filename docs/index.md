@@ -1,154 +1,69 @@
 ---
-layout: home
-title: Spotifast
-description: A fast, lightweight Spotify app for Linux, macOS, and Windows.
-permalink: /
-hero:
-  name: Spotifast
-  text: Spotify, native and fast
-  tagline: A lightweight Spotify app for Linux, macOS, and Windows. Listen on your computer, browse your music, and control your other devices.
-  actions:
-    - theme: brand
-      text: Download
-      link: /download/
-    - theme: alt
-      text: What is Spotifast?
-      link: /what-is-spotifast/
-    - theme: alt
-      text: GitHub
-      link: https://github.com/crmne/spotifast
-  image:
-    src: /screenshot.png
-    alt: "Spotifast Home with the playlist library, recommendations, queue, and player visible"
-    width: 2018
-    height: 1198
-
-features:
-  - icon: ⚡
-    title: Lightweight
-    details: Opens in well under a second and typically uses just 100–250 MB of memory.
-  - icon: 🔊
-    title: Spotify Connect
-    details: Listen on your computer with smooth transitions between songs, or control music on a speaker, phone, or TV. Playback needs Spotify Premium.
-  - icon: 📚
-    title: Library and search
-    details: Browse playlists, Liked Songs, albums, artists, and podcasts. Search the catalogue and edit playlists you own.
-  - icon: 🎨
-    title: Themes
-    details: Choose light, dark, or your own colours. On Omarchy, Spotifast can follow your desktop theme as it changes, while the music keeps playing.
-  - icon: 📻
-    title: Winamp mini player
-    details: Bring back the classic Winamp look, with skins, a playlist, sound controls, and animations that move to your music.
-    link: /winamp/
-    link_text: See it in action
-  - icon: 🌀
-    title: MilkDrop
-    details: Watch colourful animations react to your music in their own window or full screen. Choose from more than 10,000 designs.
-    link: /milkdrop/
-    link_text: Open the guide
-  - icon: ⌨️
-    title: Desktop controls
-    details: Use keyboard shortcuts and your keyboard's media keys. Keep the music playing after you close the window.
-  - icon: 🔓
-    title: Open source
-    details: Free to use, study, and improve. Explore the code, report a problem, or help build the next version.
-    link: https://github.com/crmne/spotifast
-    link_text: Read the source
+layout: default
+title: Spinity
+description: A native Spotify client, fast and lightweight.
 ---
 
-<video class="hero-film image-src" controls muted loop playsinline preload="metadata" poster="/assets/images/launch-film-poster.jpg" aria-label="Spotifast in a minute: a film of the app, made with its built-in demo content" hidden>
-  <source src="/assets/videos/launch-film.mp4" type="video/mp4">
-</video>
+{% assign version = site.data.versions.current %}
 
-<script>
-  // The theme's hero takes a picture; the film takes its place where
-  // scripts run, and the screenshot stays where they do not.
-  (function () {
-    var film = document.querySelector(".hero-film");
-    var slot = document.querySelector(".VPHero .image-container");
-    if (!film || !slot) return;
-    slot.replaceChildren(film);
-    film.hidden = false;
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      film.play().catch(function () {});
-    }
-  })();
-</script>
-
-<style>
-  .hero-film {
-    display: block;
-    background: #0b0e0c;
-  }
-</style>
-
-## It turns into Winamp
-
-Load a classic `.wsz` skin from the
-[Winamp Skin Museum](https://skins.webamp.org). The mini player includes
-animated sound displays, an equalizer to adjust your sound, and a playlist.
-Roll it up into a thin bar or enlarge it while keeping the classic pixels
-sharp. [See the mini player in detail](/winamp/).
-
-<div class="winamp-showcase">
-  <img src="/assets/images/winamp.png" alt="The mini player wearing the built-in skin" width="550" height="812">
+<div class="hero">
+  <div class="hero-content">
+    <img src="{{ site.baseurl }}/assets/images/logo.svg" alt="Spinity logo" width="88" height="88" class="hero-logo">
+    <h1>Spinity</h1>
+    <p class="hero-tagline"><strong>Spotify, native and fast.</strong></p>
+    <p>A lightweight music app for Linux, macOS, and Windows.</p>
+    <div class="hero-actions">
+      <a href="{{ site.baseurl }}/download/" class="button primary">Download</a>
+      <a href="{{ site.baseurl }}/getting-started/" class="button">Getting started</a>
+      <a href="{{ site.baseurl }}/using-spinity/" class="button">User guide</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="{{ site.baseurl }}/assets/images/screenshot.png" alt="Spinity Home with the playlist library, recommendations, queue, and player visible" width="800" height="500">
+  </div>
 </div>
 
-## MilkDrop with more than 10,000 presets
+<div class="features">
+  <div class="feature">
+    <h2>Your music, on your desktop</h2>
+    <p>Browse playlists, Liked Songs, albums, artists, and podcasts. Search the catalogue and edit playlists you own.</p>
+  </div>
+  <div class="feature">
+    <h2>Spotify Connect</h2>
+    <p>Play on this computer or control playback on your other devices.</p>
+  </div>
+  <div class="feature">
+    <h2>Themes</h2>
+    <p>Choose light, dark, system appearance, or custom colours. Follow your desktop theme as it changes.</p>
+  </div>
+  <div class="feature">
+    <h2>Desktop controls</h2>
+    <p>Use keyboard shortcuts and media keys. Keep music playing from the tray when supported.</p>
+  </div>
+  <div class="feature">
+    <h2>Winamp mini player</h2>
+    <p>Use classic skins with an equalizer, playlist, and animated sound displays.</p>
+  </div>
+  <div class="feature">
+    <h2>MilkDrop</h2>
+    <p>Watch music-reactive visuals in a separate window or full screen.</p>
+  </div>
+</div>
 
-On first use, Spotifast automatically downloads the original MilkDrop 2
-presets and projectM's Cream of the Crop collection. These visual designs
-react to music playing on your computer, in a resizable window or full screen.
-[See the controls and preset details](/milkdrop/).
+<div class="milkdrop-showcase">
+  <video autoplay loop muted playsinline preload="metadata" poster="{{ site.baseurl }}/assets/images/milkdrop-poster.jpg" aria-label="MilkDrop presets reacting to music in Spinity">
+    <source src="{{ site.baseurl }}/assets/videos/milkdrop.mp4" type="video/mp4">
+  </video>
+</div>
 
-<video class="milkdrop-showcase" autoplay loop muted playsinline preload="metadata" poster="/assets/images/milkdrop-poster.jpg" aria-label="MilkDrop presets reacting to music in Spotifast">
-  <source src="/assets/images/milkdrop.mp4" type="video/mp4">
-</video>
+<div class="sibling">
+  <p>Spinity's sibling: the same native interface, for WhatsApp. Both are built on <a href="https://github.com/crmne/fastframe">fastframe</a>.</p>
+</div>
 
-## WhatsApp, just as fast
-
-**Want WhatsApp just as fast and native?** [ZapFast](https://zapfast.rocks) is
-Spotifast's sibling: the same native interface, for WhatsApp. Both are built on [fastframe](https://github.com/crmne/fastframe), the shared
-foundation for native Rust apps built with egui.
-
-<style>
-  /* The hero image slot is sized for a square logo; the screenshot needs the
-     room. Page-scoped overrides, so the theme stays untouched. */
-  .VPHero .image-container {
-    width: 100% !important;
-    height: auto !important;
-    transform: none !important;
-  }
-  .VPHero .image-src {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    width: 100% !important;
-    height: auto !important;
-    max-width: 100% !important;
-    max-height: none !important;
-    padding: 0 !important;
-    border-radius: 12px;
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.45);
-  }
-  .winamp-showcase {
-    text-align: center;
-  }
-  .winamp-showcase img,
-  .milkdrop-showcase {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.35);
-  }
-  .milkdrop-showcase {
-    display: block;
-    width: 100%;
-  }
-  @media (max-width: 959px) {
-    .VPHero .image {
-      margin: 0 0 24px !important;
-    }
-  }
-</style>
+<div class="acknowledgements">
+  <p>Spinity uses <a href="https://github.com/librespot-org/librespot">librespot</a>,
+  <a href="https://github.com/emilk/egui">egui</a>, the <a href="https://rsms.me/inter/">Inter</a>
+  typeface (OFL), and <a href="https://lucide.dev">Lucide</a> icons (ISC).</p>
+  <p>Spinity is an independent project and is not affiliated with Spotify.<br>Spotify is a trademark of Spotify AB.</p>
+  <p>Licensed under the <a href="https://github.com/Yield-Studio/spinity1/blob/main/LICENSE">Apache License 2.0</a>.</p>
+</div>

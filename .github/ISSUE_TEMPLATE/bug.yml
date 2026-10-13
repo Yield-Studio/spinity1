@@ -7,9 +7,9 @@ body:
       value: |
         Please include the log from Spotifast's last run:
 
-        - Linux: `~/.local/state/spotifast/spotifast.log`
-        - macOS: `~/Library/Application\ Support/me.paolino.spotifast/spotifast.log`
-        - Windows: `%LOCALAPPDATA%\paolino\spotifast\data\spotifast.log`
+        - Linux: `~/.local/state/spinity/spinity.log`
+        - macOS: `~/Library/Application\ Support/me.paolino.spinity/spinity.log`
+        - Windows: `%LOCALAPPDATA%\paolino\spinity\data\spinity.log`
 
         If the app crashed or vanished, include `panic.log` from the same folder.
   - type: input
@@ -56,7 +56,7 @@ body:
   - type: textarea
     id: log
     attributes:
-      label: spotifast.log
+      label: spinity.log
       description: Reproduce the problem, quit the app, then paste the whole file here (and panic.log, if there is one). Paths are above.
       render: text
     validations:

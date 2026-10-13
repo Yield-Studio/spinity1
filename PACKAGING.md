@@ -7,16 +7,16 @@ Installer packages, recipe templates and downstream repositories.
 Application assets and native recipes stay in `packaging/`.
 
 Public AUR, Homebrew, DEB/RPM and release download names use Spotifast, and
-Linux packages install `spotifast` as the only executable.
+Linux packages install `spinity` as the only executable.
 
-Linux builds provide `spotifast.desktop` and `spotifast.svg`, matching the
+Linux builds provide `spinity.desktop` and `spinity.svg`, matching the
 native window and MPRIS desktop-entry ID. Flatpak installs those assets under
 its full application ID and sets the window class to match.
 `python3 packaging/test-launchers.py` exercises the actual AUR and Flatpak
 installation commands with a release payload, using Ruby to read YAML.
 
 Linux packages also install the optional Omarchy template and hook under
-`share/spotifast/omarchy` in their installation prefix. The normal application
+`share/spinity/omarchy` in their installation prefix. The normal application
 launch registers missing per-user files and prepares the current palette on an
 Omarchy desktop, without changing existing files or the selected theme. Setup
 runs in the background; package-manager scripts do not write into user homes.
@@ -66,7 +66,7 @@ Packaging CI builds both architectures using a pinned published release
 runs. It then installs and removes each package in clean Ubuntu 24.04, Debian
 13, Fedora 41 and current Fedora containers on native amd64 and arm64 runners.
 Each case verifies that a settings fixture survives installation and removal,
-runs `spotifast --version`, loads the GUI libraries with `dlopen`, and
+runs `spinity --version`, loads the GUI libraries with `dlopen`, and
 verifies the desktop entry and icon. They cover installation and library
 resolution, not a running desktop or Spotify playback. On release runs these
 checks follow artifact attachment; a failure marks the workflow as failed.
@@ -108,7 +108,7 @@ for commands and supported formats.
 The manual **Flatpak from release** workflow can rebuild a missing Flatpak from
 an existing tag. It verifies the published Linux archive against `checksums.txt`
 and uses that tag's version and description with the current Flatpak app ID,
-`rocks.spotifast.Spotifast`, without compiling or replacing binaries.
+`rocks.spinity.Spotifast`, without compiling or replacing binaries.
 It uploads a workflow artifact only. After checking the bundle, attach it to the
 existing release and add its hash to `checksums.txt`, preserving every existing
 asset and checksum. Release tags stay immutable.
@@ -158,8 +158,8 @@ their original signatures; this setup does not replace release assets.
 ## Windows Installer package
 
 Each Windows release job builds the Inno Setup program
-(`packaging/windows/spotifast.iss`) and the Windows Installer package from the
-same binary. The package comes from `packaging/windows/spotifast.wxs` (WiX
+(`packaging/windows/spinity.iss`) and the Windows Installer package from the
+same binary. The package comes from `packaging/windows/spinity.wxs` (WiX
 Toolset 5): native-packages selects `windows-amd64` or `windows-arm64` with
 `--defer-recipes` and runs `packaging/windows/build-msi.py`. That script
 compiles the package's custom action (`running-copy.c`) with the job's MSVC
@@ -169,7 +169,7 @@ version, and runs WiX with `-pdbtype none`, so the package is the only output.
 Windows installs move to the package over two releases. The next release
 ships both `-setup.exe` and `.msi`: earlier versions only know the setup
 program and update through it, and that release's updater prefers the package.
-Later releases can drop the setup program, `spotifast.iss` and
+Later releases can drop the setup program, `spinity.iss` and
 `test-uninstall.py`.
 
 The updater (fastframe-update) runs `msiexec /i PACKAGE /qn /norestart /l*v LOG
@@ -185,18 +185,18 @@ INSTALLFOLDER="<the app's folder>"` and accepts exit codes 0 and 3010. The packa
   files, removes `unins000.*` and the `{FCED1EA0-EBF5-4C32-BA3B-A3AD724BACC3}_is1`
   uninstall entry, and keeps the Start menu entry and the desktop shortcut
   task. It never runs Inno's uninstaller, which would delete the package's files.
-- installs the `spotifast-installer.txt` marker the updater looks for.
+- installs the `spinity-installer.txt` marker the updater looks for.
 - replaces every file whatever its version or date (`REINSTALLMODE=amus`).
 - closes a running installed copy before an update, and removes nothing while
   it runs (#766). A portable copy elsewhere is never closed.
 
 To build it on Windows, install WiX with
 `dotnet tool install --global wix --version 5.0.2` and open a Visual Studio
-developer prompt for the target architecture. Put `spotifast.exe`, `README.md`,
-`LICENSE` and `packaging\windows\spotifast-installer.txt` in a folder, then:
+developer prompt for the target architecture. Put `spinity.exe`, `README.md`,
+`LICENSE` and `packaging\windows\spinity-installer.txt` in a folder, then:
 
 ```powershell
-python packaging\windows\build-msi.py FOLDER dist\spotifast.msi 1.2.3 amd64
+python packaging\windows\build-msi.py FOLDER dist\spinity.msi 1.2.3 amd64
 ```
 
 With the same files in `dist\msi-input-x86_64-pc-windows-msvc`,
@@ -211,6 +211,6 @@ a setup program install. CI runs it on x64 and arm64.
 `python packaging\windows\test-uninstall.py ISCC.exe` covers the setup
 program's uninstaller.
 
-`packaging/release-names.py DIST TAG` checks the release's `spotifast-`
+`packaging/release-names.py DIST TAG` checks the release's `spinity-`
 downloads and writes their checksums. Run `python3 packaging/test-release-names.py`
 when changing this step. Published historical downloads are never rewritten.

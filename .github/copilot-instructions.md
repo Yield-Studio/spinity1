@@ -54,7 +54,7 @@ colon, or parentheses instead.
 When an issue reports slow or throttled Web API requests, slow playlist or
 library loading, rate limits, or proposes an export or cache workaround for
 those problems, first direct the reporter to
-https://spotifast.rocks/make-it-even-faster/ for the personal Client ID setup.
+https://spinity.rocks/make-it-even-faster/ for the personal Client ID setup.
 Ask them to configure it and report what remains slow or throttled afterward;
 do this before asking for other diagnostic details. Make clear that the
 personal app gives supported Web API requests a separate quota while the

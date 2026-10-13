@@ -3,7 +3,7 @@
 Usage: python packaging/windows/test-msi.py [path/to/ISCC.exe]
 
 Runs on Windows with what build-msi.py needs (WiX 5 and the MSVC tools for
-this machine, which also build a harmless stand-in for spotifast.exe that
+this machine, which also build a harmless stand-in for spinity.exe that
 never reaches Spotify). Every package it builds has an identity of its own:
 another upgrade code, link scheme, registry keys, folder and shortcut names,
 so nothing it does can touch a real Spotifast installation. Inno Setup's
@@ -54,7 +54,7 @@ INNO_KEY = rf"Software\Microsoft\Windows\CurrentVersion\Uninstall\{INNO_APP_ID}_
 LINK_COMMAND = rf"Software\Classes\{SCHEME}\shell\open\command"
 OWN_LINK_COMMAND = rf"Software\Classes\{IDENTITY}.spotify\shell\open\command"
 FIRST, SECOND = "1.0.0", "1.0.1"
-FILES = {"spotifast.exe", "README.md", "LICENSE", "spotifast-installer.txt"}
+FILES = {"spinity.exe", "README.md", "LICENSE", "spinity-installer.txt"}
 
 PAYLOAD_SOURCE = r"""
 #include <stdio.h>
@@ -83,7 +83,7 @@ def architecture():
 
 
 def build_payload(folder, version):
-    """A stand-in spotifast.exe carrying VERSION in its version resource."""
+    """A stand-in spinity.exe carrying VERSION in its version resource."""
     folder.mkdir(parents=True)
     numbers = version.replace(".", ",") + ",0"
     (folder / "payload.c").write_text(PAYLOAD_SOURCE)
@@ -107,21 +107,21 @@ END
 """)
     for command in (
         ["rc", "/nologo", "/fo", "payload.res", "payload.rc"],
-        ["cl", "/nologo", "/O1", "payload.c", "payload.res", "/Fespotifast.exe"],
+        ["cl", "/nologo", "/O1", "payload.c", "payload.res", "/Fespinity.exe"],
     ):
         subprocess.run(command, cwd=folder, check=True, timeout=120)
     payload = folder / "payload"
     payload.mkdir()
-    shutil.copy2(folder / "spotifast.exe", payload)
+    shutil.copy2(folder / "spinity.exe", payload)
     for name in ("README.md", "LICENSE"):
         shutil.copy2(REPO / name, payload)
-    shutil.copy2(HERE / "spotifast-installer.txt", payload)
+    shutil.copy2(HERE / "spinity-installer.txt", payload)
     return payload
 
 
 def build_inno_setup(root, binary):
-    """spotifast.iss as it ships, under the test identity."""
-    script = (HERE / "spotifast.iss").read_text(encoding="utf-8-sig")
+    """spinity.iss as it ships, under the test identity."""
+    script = (HERE / "spinity.iss").read_text(encoding="utf-8-sig")
     for old, new in (
         ('#define AppName "Spotifast"', f'#define AppName "{IDENTITY}"'),
         ('#define AppIdentity "Spotifast"', f'#define AppIdentity "{IDENTITY}"'),
@@ -132,7 +132,7 @@ def build_inno_setup(root, binary):
         ("[Setup]\n", f"[Setup]\nSourceDir={HERE}\n"),
     ):
         if old not in script:
-            raise AssertionError(f"spotifast.iss no longer contains {old!r}")
+            raise AssertionError(f"spinity.iss no longer contains {old!r}")
         script = script.replace(old, new)
     path = root / "inno.iss"
     path.write_text(script, encoding="utf-8-sig")
@@ -214,7 +214,7 @@ def known_folder(csidl):
 class PackageTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.temp = tempfile.TemporaryDirectory(prefix="spotifast-msi-test-")
+        cls.temp = tempfile.TemporaryDirectory(prefix="spinity-msi-test-")
         cls.addClassCleanup(cls.temp.cleanup)
         # The long form: a runner's TEMP is an 8.3 path.
         cls.root = Path(cls.temp.name).resolve()
@@ -224,7 +224,7 @@ class PackageTest(unittest.TestCase):
             cls.payloads[version] = build_payload(cls.root / f"payload-{version}", version)
             cls.packages[version] = cls.root / f"{IDENTITY}-{version}.msi"
             build_msi.build(cls.payloads[version], cls.packages[version], version, architecture(), DEFINES)
-        cls.inno = build_inno_setup(cls.root, cls.payloads[FIRST] / "spotifast.exe") if ISCC else None
+        cls.inno = build_inno_setup(cls.root, cls.payloads[FIRST] / "spinity.exe") if ISCC else None
         cls.start_menu = Path(os.environ["APPDATA"], "Microsoft", "Windows", "Start Menu", "Programs", f"{IDENTITY}.lnk")
         cls.desktop = known_folder(0x10) / f"{IDENTITY}.lnk"  # CSIDL_DESKTOPDIRECTORY
         cls.default_folder = Path(os.environ["LOCALAPPDATA"], "Programs", IDENTITY)
@@ -303,7 +303,7 @@ class PackageTest(unittest.TestCase):
     def portable_copy(self):
         folder = self.root / uuid.uuid4().hex / "portable"
         folder.mkdir(parents=True)
-        return Path(shutil.copy2(self.payloads[FIRST] / "spotifast.exe", folder))
+        return Path(shutil.copy2(self.payloads[FIRST] / "spinity.exe", folder))
 
     def contents(self):
         return {path.name: path.read_bytes() for path in self.folder.iterdir() if path.is_file()}
@@ -311,13 +311,13 @@ class PackageTest(unittest.TestCase):
     def assertInstalled(self, version):
         self.assertEqual({path.name for path in self.folder.iterdir() if path.is_file()}, FILES)
         self.assertEqual(
-            (self.folder / "spotifast.exe").read_bytes(),
-            (self.payloads[version] / "spotifast.exe").read_bytes(),
+            (self.folder / "spinity.exe").read_bytes(),
+            (self.payloads[version] / "spinity.exe").read_bytes(),
         )
-        self.assertEqual((self.folder / "spotifast-installer.txt").read_text().strip(), "spotifast-installer-v1")
+        self.assertEqual((self.folder / "spinity-installer.txt").read_text().strip(), "spinity-installer-v1")
         self.assertEqual(len(installed_products()), 1)
         self.assertEqual(value(INSTALLER, "InstallFolder"), f"{self.folder}\\")
-        command = f'"{self.folder}\\spotifast.exe" "%1"'
+        command = f'"{self.folder}\\spinity.exe" "%1"'
         self.assertEqual(value(LINK_COMMAND), command)
         self.assertEqual(value(OWN_LINK_COMMAND), command)
         self.assertEqual(value(rf"Software\{IDENTITY}\Capabilities\URLAssociations", SCHEME), f"{IDENTITY}.spotify")
@@ -353,7 +353,7 @@ class PackageTest(unittest.TestCase):
 
     def test_running_copy_stops_a_silent_uninstall_before_anything_goes(self):
         self.assertSucceeded(self.install_like_the_updater(FIRST))
-        process = self.start(self.folder / "spotifast.exe")
+        process = self.start(self.folder / "spinity.exe")
         before = self.contents()
         self.assertNotEqual(self.uninstall(FIRST), 0)
         self.assertEqual(self.contents(), before)
@@ -370,14 +370,14 @@ class PackageTest(unittest.TestCase):
 
     def test_missing_executable_does_not_block_uninstall(self):
         self.assertSucceeded(self.install_like_the_updater(FIRST))
-        (self.folder / "spotifast.exe").unlink()
+        (self.folder / "spinity.exe").unlink()
         self.assertSucceeded(self.uninstall(FIRST))
         self.assertRemoved()
 
     def test_update_closes_only_the_installed_copy_and_keeps_choices(self):
         self.assertSucceeded(self.install(FIRST, INSTALLFOLDER=self.folder, DESKTOPSHORTCUT=1))
         self.assertTrue(self.desktop.exists())
-        installed = self.start(self.folder / "spotifast.exe")
+        installed = self.start(self.folder / "spinity.exe")
         portable = self.start(self.portable_copy())
         self.assertSucceeded(self.install_like_the_updater(SECOND))
         installed.wait(timeout=10)
@@ -407,7 +407,7 @@ class PackageTest(unittest.TestCase):
         self.assertTrue(self.start_menu.exists())
         self.assertEqual(self.desktop.exists(), "desktopicon" in tasks)
         # What the updater leaves beside the app: never the package's to remove.
-        staging = self.folder / ".spotifast-update-0123456789abcdef"
+        staging = self.folder / ".spinity-update-0123456789abcdef"
         staging.mkdir()
         (staging / "result.txt").write_text("Updated to 1.0.0")
         return staging
@@ -439,7 +439,7 @@ class PackageTest(unittest.TestCase):
 
     def test_running_inno_copy_is_closed_before_the_takeover(self):
         self.install_with_inno()
-        installed = self.start(self.folder / "spotifast.exe")
+        installed = self.start(self.folder / "spinity.exe")
         self.assertSucceeded(self.install_like_the_updater(SECOND))
         installed.wait(timeout=10)
         self.assertInstalled(SECOND)

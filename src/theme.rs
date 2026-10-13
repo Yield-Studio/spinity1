@@ -38,21 +38,21 @@ impl Palette {
     pub fn dark() -> Self {
         Self {
             dark: true,
-            window: Color32::from_rgb(0x0f, 0x11, 0x14),
-            panel: Color32::from_rgb(0x15, 0x18, 0x1c),
-            surface: Color32::from_rgb(0x1d, 0x21, 0x27),
-            surface_hover: Color32::from_rgb(0x26, 0x2b, 0x33),
-            surface_active: Color32::from_rgb(0x2f, 0x35, 0x3f),
-            outline: Color32::from_rgb(0x2a, 0x30, 0x38),
-            text: Color32::from_rgb(0xf2, 0xf4, 0xf6),
-            secondary: Color32::from_rgb(0xa9, 0xb1, 0xbc),
-            dim: Color32::from_rgb(0x6e, 0x77, 0x84),
-            accent: Color32::from_rgb(0x1e, 0xd7, 0x60),
-            accent_hover: Color32::from_rgb(0x3c, 0xe8, 0x7a),
-            on_accent: Color32::from_rgb(0x0a, 0x14, 0x0e),
-            danger: Color32::from_rgb(0xf5, 0x71, 0x7f),
-            warning: Color32::from_rgb(0xf2, 0xb8, 0x5c),
-            overlay: Color32::from_rgb(0x22, 0x27, 0x2e),
+            window: Color32::from_rgb(0x0a, 0x0a, 0x12),
+            panel: Color32::from_rgb(0x12, 0x12, 0x1a),
+            surface: Color32::from_rgb(0x1a, 0x1a, 0x24),
+            surface_hover: Color32::from_rgb(0x24, 0x24, 0x30),
+            surface_active: Color32::from_rgb(0x30, 0x30, 0x3c),
+            outline: Color32::from_rgb(0x2a, 0x2a, 0x38),
+            text: Color32::from_rgb(0xf0, 0xf0, 0xf8),
+            secondary: Color32::from_rgb(0xa0, 0xa0, 0xc0),
+            dim: Color32::from_rgb(0x60, 0x60, 0x80),
+            accent: Color32::from_rgb(0x60, 0x80, 0xff),
+            accent_hover: Color32::from_rgb(0x80, 0xa0, 0xff),
+            on_accent: Color32::from_rgb(0x00, 0x10, 0x30),
+            danger: Color32::from_rgb(0xff, 0x60, 0x80),
+            warning: Color32::from_rgb(0xff, 0xc0, 0x60),
+            overlay: Color32::from_rgb(0x20, 0x20, 0x2a),
             shadow: Color32::from_black_alpha(140),
         }
     }
@@ -60,20 +60,20 @@ impl Palette {
     pub fn light() -> Self {
         Self {
             dark: false,
-            window: Color32::from_rgb(0xf8, 0xf9, 0xfb),
+            window: Color32::from_rgb(0xf8, 0xf8, 0xfc),
             panel: Color32::from_rgb(0xff, 0xff, 0xff),
-            surface: Color32::from_rgb(0xee, 0xf0, 0xf3),
-            surface_hover: Color32::from_rgb(0xe3, 0xe6, 0xeb),
-            surface_active: Color32::from_rgb(0xd7, 0xdb, 0xe1),
-            outline: Color32::from_rgb(0xdd, 0xe1, 0xe6),
-            text: Color32::from_rgb(0x14, 0x17, 0x1a),
-            secondary: Color32::from_rgb(0x53, 0x5b, 0x66),
-            dim: Color32::from_rgb(0x8b, 0x93, 0x9e),
-            accent: Color32::from_rgb(0x15, 0xa6, 0x4a),
-            accent_hover: Color32::from_rgb(0x12, 0x8f, 0x40),
+            surface: Color32::from_rgb(0xf0, 0xf0, 0xf8),
+            surface_hover: Color32::from_rgb(0xe8, 0xe8, 0xf0),
+            surface_active: Color32::from_rgb(0xe0, 0xe0, 0xe8),
+            outline: Color32::from_rgb(0xdd, 0xdd, 0xe6),
+            text: Color32::from_rgb(0x10, 0x10, 0x18),
+            secondary: Color32::from_rgb(0x50, 0x50, 0x70),
+            dim: Color32::from_rgb(0x80, 0x80, 0xa0),
+            accent: Color32::from_rgb(0x40, 0x60, 0xff),
+            accent_hover: Color32::from_rgb(0x20, 0x40, 0xe0),
             on_accent: Color32::WHITE,
-            danger: Color32::from_rgb(0xd6, 0x3b, 0x4c),
-            warning: Color32::from_rgb(0xb8, 0x7a, 0x14),
+            danger: Color32::from_rgb(0xd0, 0x30, 0x50),
+            warning: Color32::from_rgb(0xc0, 0x80, 0x20),
             overlay: Color32::from_rgb(0xff, 0xff, 0xff),
             shadow: Color32::from_black_alpha(50),
         }
@@ -138,8 +138,8 @@ impl fastframe_theme::Palette for Palette {
 /// user.
 pub fn enable_desktop_themes(catalog: &mut Catalog) {
     catalog.enable_desktop_themes(fastframe_theme::DesktopThemes {
-        slug: "spotifast",
-        omarchy_template: include_str!("../contrib/omarchy/spotifast.json.tpl"),
+        slug: "spinity",
+        omarchy_template: include_str!("../contrib/omarchy/spinity.json.tpl"),
         // The template has not changed since it first shipped.
         omarchy_previous_templates: &[],
         presets: true,
@@ -180,7 +180,7 @@ pub fn catalog_detail(
         ),
         Status::Problem(_) => gettext(
             locale,
-            "Custom themes could not be loaded. Run spotifast reload-themes to try again.",
+            "Custom themes could not be loaded. Run spinity reload-themes to try again.",
         ),
     }
 }
@@ -382,9 +382,9 @@ fn install_fonts(ctx: &egui::Context) {
 
 fastframe_icons::icons! {
     /// Every icon the interface draws. The shared Lucide icons come from
-    /// fastframe-icons; the rest are Spotifast's own files.
+    /// fastframe-icons; the rest are Spinity's own files.
     pub enum Icon {
-        prefix: "spotifast-icon-",
+        prefix: "spinity-icon-",
         directory: "../assets/icons/",
         ArrowLeft => lucide "arrow-left",
         ArrowRight => "arrow-right",
@@ -552,7 +552,7 @@ pub fn icon_button(
 /// Horizontal offset that optically centers play triangles.
 ///
 /// Lucide includes a 1/24-width shift; a measured 3% shift centers the icon at
-/// Spotifast's sizes. Use this everywhere instead of per-call adjustments.
+/// Spinity's sizes. Use this everywhere instead of per-call adjustments.
 pub fn play_glyph_offset(icon: Icon, icon_size: f32) -> Vec2 {
     if matches!(icon, Icon::PlayFilled | Icon::Play) {
         Vec2::new(icon_size * (0.03 - 1.0 / 24.0), 0.0)
@@ -568,7 +568,7 @@ pub fn logo(ui: &egui::Ui, center: egui::Pos2, diameter: f32) {
     let ppp = ui.ctx().pixels_per_point();
     // The raster keeps two pixels of margin on each side of the disc.
     let pixels = (diameter * ppp).round() as usize + 4;
-    let id = egui::Id::new(("spotifast-logo", pixels));
+    let id = egui::Id::new(("spinity-logo", pixels));
     let texture = ui
         .ctx()
         .data(|data| data.get_temp::<egui::TextureHandle>(id))
@@ -579,7 +579,7 @@ pub fn logo(ui: &egui::Ui, center: egui::Pos2, diameter: f32) {
             );
             let texture =
                 ui.ctx()
-                    .load_texture("spotifast-logo", image, egui::TextureOptions::LINEAR);
+                    .load_texture("spinity-logo", image, egui::TextureOptions::LINEAR);
             ui.ctx()
                 .data_mut(|data| data.insert_temp(id, texture.clone()));
             texture
@@ -992,11 +992,11 @@ mod tests {
     fn the_shipped_omarchy_files_are_the_shared_ones() {
         let lines = |text: &str| text.replace("\r\n", "\n");
         assert_eq!(
-            lines(include_str!("../contrib/omarchy/spotifast-theme")),
-            lines(&fastframe_theme::omarchy::hook_script("spotifast"))
+            lines(include_str!("../contrib/omarchy/spinity-theme")),
+            lines(&fastframe_theme::omarchy::hook_script("spinity"))
         );
         assert_eq!(
-            lines(include_str!("../contrib/omarchy/spotifast.json.tpl")),
+            lines(include_str!("../contrib/omarchy/spinity.json.tpl")),
             lines(fastframe_theme::omarchy::BASE_TEMPLATE)
         );
     }
@@ -1069,7 +1069,7 @@ mod tests {
     }
 
     #[test]
-    fn a_local_palette_keeps_spotifasts_widget_style_local() {
+    fn a_local_palette_keeps_spinitys_widget_style_local() {
         let ctx = egui::Context::default();
         apply(&ctx, &Palette::light());
         let dark = Palette::dark();

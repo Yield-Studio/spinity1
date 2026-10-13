@@ -1,119 +1,68 @@
-title: Spotifast
-spotifast_version: "0.12.0"
-description: A fast, lightweight Spotify app for Linux, macOS, and Windows.
-lang: en-US
-timezone: Europe/Berlin
-url: https://spotifast.rocks
-baseurl: ""
-logo: /assets/images/logo.svg
-image: /screenshot.png
+theme: jekyll-theme-minimal
 
+# Site settings
+title: Spinity
+name: Spinity
+description: >-
+  A native Spotify client, fast and lightweight.
+
+# Site navigation
+navigation:
+  - text: Home
+    link: /
+  - text: Download
+    link: /download/
+  - text: Getting started
+    link: /getting-started/
+  - text: User guide
+    link: /using-spinity/
+  - text: More
+    link: /more/
+
+# Site author
+author:
+  name: Yield Studio
+  email: 
+  url: https://github.com/Yield-Studio/spinity1
+
+# Site URLs
+url: https://github.com/Yield-Studio/spinity1
+baseurl: ""
+
+# Repository settings for GitHub Pages
+repository: Yield-Studio/spinity1
+
+# Build settings
 markdown: kramdown
 kramdown:
-  input: GFM
+  syntax_highlighter: rouge
 
-permalink: pretty
-theme: jekyll-vitepress-theme
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - .git/
+  - .github/
+  - LICENSE
+  - README.md
 
-collections:
-  guide:
-    output: true
-    permalink: "/:name/"
-  reference:
-    output: true
-    permalink: "/:name/"
+# Plugins
+gems:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-redirect-from
 
+# Collections
 defaults:
   - scope:
       path: ""
+      type: "_guide"
     values:
-      layout: default
-      image: /screenshot.png
-      topics:
-        - Spotify client
-        - Rust
-        - egui
-        - librespot
-        - Spotify Connect
-        - Linux music player
-  - scope:
-      type: guide
-    values:
-      layout: default
-  - scope:
-      type: reference
-    values:
-      layout: default
+      layout: "guide"
+      permalink: /:path/
 
-jekyll_vitepress:
-  seo:
-    page_type: TechArticle
-    image:
-      path: /screenshot.png
-      alt: Spotifast showing a playlist with the queue open and a track playing
-    publisher:
-      type: Person
-      name: Carmine Paolino
-      url: https://paolino.me
-      same_as:
-        - https://github.com/crmne/spotifast
-  llms:
-    title: Spotifast
-    description: >-
-      Documentation for a native Spotify client for Linux, macOS,
-      and Windows. It covers local playback, library access, and Spotify
-      Connect.
-    full: true
-    details: >-
-      Covers installation, sign-in, everyday use, settings, and Spotify
-      connections. Source is on
-      [GitHub](https://github.com/crmne/spotifast).
-  branding:
-    site_title: Spotifast
-    logo:
-      default: /assets/images/logo.svg
-      alt: Spotifast
-  syntax:
-    light_theme: github
-    dark_theme: github.dark
-  footer:
-    enabled: true
-    show_on_docs: false
-    message: >-
-      Brought to you by <a href="https://paolino.me" target="_blank" rel="noreferrer">Carmine Paolino</a>, maker of
-    copyright: >-
-      <span class="footer-brand-links"><a href="https://chatwithwork.com" class="footer-chatwithwork-link" target="_blank" rel="noreferrer"><img class="footer-chatwithwork-logo theme-image light" src="https://chatwithwork.com/logotype.svg" alt="Chat with Work"><img class="footer-chatwithwork-logo theme-image dark" src="https://chatwithwork.com/logotype-dark.svg" alt="Chat with Work"></a><a href="https://rubyllm.com" class="footer-rubyllm-link" target="_blank" rel="noreferrer"><img class="footer-rubyllm-logo theme-image light" src="https://rubyllm.com/assets/images/logotype.svg" alt="RubyLLM"><img class="footer-rubyllm-logo theme-image dark" src="https://rubyllm.com/assets/images/logotype_dark.svg" alt="RubyLLM"></a><a href="https://paolino.me/projects" target="_blank" rel="noreferrer" aria-label="More projects by Carmine Paolino">and more</a></span><br><span class="footer-built-with">Docs built with <a href="https://jekyll-vitepress.dev" target="_blank" rel="noreferrer">Jekyll VitePress</a>. Spotifast is an independent project, not affiliated with or endorsed by Spotify AB. Spotify is a trademark of Spotify AB.</span>
-  doc_footer:
-    enabled: true
-    previous_label: Previous page
-    next_label: Next page
-  last_updated:
-    enabled: true
-    text: Last updated
-    format: "%Y-%m-%d %H:%M"
-  edit_link:
-    enabled: true
-    pattern: "https://github.com/crmne/spotifast/edit/main/docs/:path"
-    text: Edit this page on GitHub
-  github_star:
-    enabled: true
-    repository: crmne/spotifast
-    text: Star
-    show_count: true
-  github_sponsor:
-    enabled: true
-    user: crmne
-    text: Sponsor
-
-plugins:
-  - jekyll-redirect-from
-  - jekyll-vitepress-theme
-
-exclude:
-  - _site
-  - .jekyll-cache
-  - .sass-cache
-  - .bundle
-  - vendor
-  - Gemfile
-  - Gemfile.lock
+# Redirects
+redirect_from:
+  json: false

@@ -570,7 +570,7 @@ pub fn table(app: &mut App, ui: &mut egui::Ui, table: Table<'_>) {
             &gettext(locale, "You're offline"),
             &gettext(
                 locale,
-                "Spotifast will reconnect automatically when your connection returns.",
+                "Spinity will reconnect automatically when your connection returns.",
             ),
         );
         return;
@@ -1459,7 +1459,7 @@ pub fn playlist(app: &mut App, ui: &mut egui::Ui, id: &str) {
                     &gettext(app.locale, "You're offline"),
                     &gettext(
                         app.locale,
-                        "Spotifast will reconnect automatically when your connection returns.",
+                        "Spinity will reconnect automatically when your connection returns.",
                     ),
                 );
                 return;
@@ -1585,7 +1585,7 @@ pub fn playlist(app: &mut App, ui: &mut egui::Ui, id: &str) {
                     &gettext(app.locale, "You're offline"),
                     &gettext(
                         app.locale,
-                        "Spotifast will reconnect automatically when your connection returns.",
+                        "Spinity will reconnect automatically when your connection returns.",
                     ),
                 );
             } else {
@@ -1611,7 +1611,7 @@ pub fn playlist(app: &mut App, ui: &mut egui::Ui, id: &str) {
                     &gettext(app.locale, "You're offline"),
                     &gettext(
                         app.locale,
-                        "Spotifast will reconnect automatically when your connection returns.",
+                        "Spinity will reconnect automatically when your connection returns.",
                     ),
                 );
             } else {
@@ -1670,7 +1670,7 @@ pub fn album(app: &mut App, ui: &mut egui::Ui, id: &str) {
                     &gettext(app.locale, "You're offline"),
                     &gettext(
                         app.locale,
-                        "Spotifast will reconnect automatically when your connection returns.",
+                        "Spinity will reconnect automatically when your connection returns.",
                     ),
                 );
                 return;
@@ -1779,7 +1779,7 @@ pub fn album(app: &mut App, ui: &mut egui::Ui, id: &str) {
                     &gettext(app.locale, "You're offline"),
                     &gettext(
                         app.locale,
-                        "Spotifast will reconnect automatically when your connection returns.",
+                        "Spinity will reconnect automatically when your connection returns.",
                     ),
                 );
             } else {
@@ -1805,7 +1805,7 @@ pub fn album(app: &mut App, ui: &mut egui::Ui, id: &str) {
                     &gettext(app.locale, "You're offline"),
                     &gettext(
                         app.locale,
-                        "Spotifast will reconnect automatically when your connection returns.",
+                        "Spinity will reconnect automatically when your connection returns.",
                     ),
                 );
             } else {
@@ -2033,7 +2033,7 @@ pub fn liked(app: &mut App, ui: &mut egui::Ui) {
             &gettext(app.locale, "You're offline"),
             &gettext(
                 app.locale,
-                "Spotifast will reconnect automatically when your connection returns.",
+                "Spinity will reconnect automatically when your connection returns.",
             ),
         );
         return;
@@ -2980,7 +2980,7 @@ mod tests {
 
     fn test_app() -> App {
         let root = std::env::temp_dir().join(format!(
-            "spotifast-table-cache-{}-{}",
+            "spinity-table-cache-{}-{}",
             std::process::id(),
             std::time::SystemTime::now()
                 .duration_since(std::time::UNIX_EPOCH)

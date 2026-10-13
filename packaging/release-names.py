@@ -12,7 +12,7 @@ def prepare(directory, tag):
         raise ValueError("Expected a release tag")
     files = []
     for path in directory.iterdir():
-        if path.name.startswith("spotifast-" + tag + "-"):
+        if path.name.startswith("spinity-" + tag + "-"):
             if not path.is_file() or path.is_symlink():
                 raise ValueError(f"Expected a regular release file: {path.name}")
             files.append(path)

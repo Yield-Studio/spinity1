@@ -22,8 +22,8 @@ sources:
 - docs/_reference/*.md
 - src/*.rs
 documentation:
-  docs/_guide/*.md: https://spotifast.rocks/%{name}/
-  docs/_reference/*.md: https://spotifast.rocks/%{name}/
+  docs/_guide/*.md: https://spinity.rocks/%{name}/
+  docs/_reference/*.md: https://spinity.rocks/%{name}/
 replies:
   version: Which version are you using?
   reproduction: What are the shortest steps that reproduce this?

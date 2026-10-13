@@ -1,14 +1,14 @@
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-const COMMAND: &str = env!("CARGO_BIN_EXE_spotifast");
+const COMMAND: &str = env!("CARGO_BIN_EXE_spinity");
 
 struct Scratch(PathBuf);
 
 impl Scratch {
     fn new() -> Self {
         let path =
-            std::env::temp_dir().join(format!("spotifast-branding-{:016x}", rand::random::<u64>()));
+            std::env::temp_dir().join(format!("spinity-branding-{:016x}", rand::random::<u64>()));
         std::fs::create_dir(&path).unwrap();
         Self(path)
     }
@@ -26,16 +26,16 @@ fn the_command_reports_its_name_and_passes_the_update_version_check() {
     assert!(output.status.success());
     assert_eq!(
         String::from_utf8(output.stdout).unwrap().trim(),
-        format!("spotifast {}", env!("CARGO_PKG_VERSION"))
+        format!("spinity {}", env!("CARGO_PKG_VERSION"))
     );
     let help = Command::new(COMMAND).arg("--help").output().unwrap();
     assert!(help.status.success());
     assert!(
         String::from_utf8(help.stdout)
             .unwrap()
-            .contains("Usage: spotifast")
+            .contains("Usage: spinity")
     );
-    assert_eq!(spotifast::updates::CONFIG.slug, "spotifast");
+    assert_eq!(spinity::updates::CONFIG.slug, "spinity");
 }
 
 /// The app's name before the rename is gone from everything but the past
@@ -48,8 +48,8 @@ fn no_file_carries_the_old_name() {
     let allowed = [
         root.join("packaging/release-notes"),
         // Old guide URLs still redirect, so links from elsewhere keep working.
-        root.join("docs/_guide/using-spotifast.md"),
-        root.join("docs/_guide/what-is-spotifast.md"),
+        root.join("docs/_guide/using-spinity.md"),
+        root.join("docs/_guide/what-is-spinity.md"),
     ];
     let skipped = [
         "target",
@@ -92,7 +92,7 @@ fn no_file_carries_the_old_name() {
 
 #[test]
 fn existing_preferences_and_custom_connect_names_survive_a_save() {
-    use spotifast::settings::{Settings, ThemeChoice};
+    use spinity::settings::{Settings, ThemeChoice};
 
     let scratch = Scratch::new();
     let path = scratch.0.join("settings.json");
@@ -103,7 +103,7 @@ fn existing_preferences_and_custom_connect_names_survive_a_save() {
             volume: 37,
             pinned_contexts: vec![
                 "spotify:playlist:123".into(),
-                spotifast::settings::LIKED_SONGS_KEY.into(),
+                spinity::settings::LIKED_SONGS_KEY.into(),
             ],
             ..Settings::default()
         };
@@ -116,7 +116,7 @@ fn existing_preferences_and_custom_connect_names_survive_a_save() {
 #[cfg(target_os = "linux")]
 #[test]
 fn the_command_forwards_links_to_the_existing_instance_on_a_private_bus() {
-    use spotifast::single_instance::{ControlCommand, Outcome};
+    use spinity::single_instance::{ControlCommand, Outcome};
 
     const CHILD: &str = "SPOTIFAST_BRANDING_PRIVATE_BUS";
     if std::env::var_os(CHILD).is_none() {
@@ -173,7 +173,7 @@ fn the_command_forwards_links_to_the_existing_instance_on_a_private_bus() {
         "{}",
         String::from_utf8_lossy(&result.stderr)
     );
-    let Outcome::Only(guard) = spotifast::single_instance::acquire(&Default::default(), None)
+    let Outcome::Only(guard) = spinity::single_instance::acquire(&Default::default(), None)
     else {
         panic!("the private bus must start without another instance");
     };

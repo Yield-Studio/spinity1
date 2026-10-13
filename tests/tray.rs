@@ -23,9 +23,9 @@ impl Watcher {
 
 fn config() -> fastframe_tray::Config {
     fastframe_tray::Config {
-        id: "spotifast",
+        id: "spinity",
         title: "Spotifast".into(),
-        icon: spotifast::util::app_icon_rgba,
+        icon: spinity::util::app_icon_rgba,
         template_icon: None,
         themed_icon: true,
         menu_on_click: false,
@@ -74,7 +74,7 @@ fn flatpak_tray_registers_without_owning_a_name() {
         return;
     }
 
-    let root = std::env::temp_dir().join(format!("spotifast-tray-bus-{}", std::process::id()));
+    let root = std::env::temp_dir().join(format!("spinity-tray-bus-{}", std::process::id()));
     std::fs::create_dir_all(&root).unwrap();
     let config = root.join("bus.conf");
     std::fs::write(&config, r#"<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-Bus Bus Configuration 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
@@ -107,7 +107,7 @@ fn flatpak_tray_registers_without_owning_a_name() {
             "--nocapture",
         ])
         .env(CHILD, "1")
-        .env("FLATPAK_ID", "rocks.spotifast.Spotifast")
+        .env("FLATPAK_ID", "rocks.spinity.Spotifast")
         .env("DBUS_SESSION_BUS_ADDRESS", address.trim())
         .status();
     let _ = bus.kill();

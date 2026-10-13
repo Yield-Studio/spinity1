@@ -1,11 +1,11 @@
-cask "spotifast" do
+cask "spinity" do
   version "@VERSION@"
   sha256 "@MACOS_SHA256@"
 
-  url "https://github.com/crmne/spotifast/releases/download/v#{version}/spotifast-v#{version}-macos-universal.dmg"
+  url "https://github.com/crmne/spinity/releases/download/v#{version}/spinity-v#{version}-macos-universal.dmg"
   name "Spotifast"
   desc "Native Spotify client"
-  homepage "https://spotifast.rocks"
+  homepage "https://spinity.rocks"
 
   livecheck do
     url :url
@@ -15,7 +15,7 @@ cask "spotifast" do
   app "Spotifast.app"
 
   zap trash: [
-    "~/Library/Application Support/me.paolino.spotifast",
-    "~/Library/Caches/me.paolino.spotifast",
+    "~/Library/Application Support/me.paolino.spinity",
+    "~/Library/Caches/me.paolino.spinity",
   ]
 end

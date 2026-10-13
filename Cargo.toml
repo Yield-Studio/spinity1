@@ -1,22 +1,22 @@
 [package]
-name = "spotifast"
-default-run = "spotifast"
+name = "spinity"
+default-run = "spinity"
 version = "0.12.0"
 edition = "2024"
 rust-version = "1.98"
-license = "MIT"
+license = "Apache-2.0"
 description = "A native Spotify client"
-repository = "https://github.com/crmne/spotifast"
+repository = "https://github.com/Yield-Studio/spinity1"
 keywords = ["spotify", "music", "egui", "librespot", "player"]
 categories = ["multimedia::audio"]
 
 [lib]
-name = "spotifast"
+name = "spinity"
 path = "src/lib.rs"
 
 [[bin]]
-name = "spotifast"
-path = "src/spotifast.rs"
+name = "spinity"
+path = "src/spinity.rs"
 
 [dependencies]
 anyhow = "1"
@@ -125,7 +125,7 @@ raw-window-handle = "0.6"
 # same stack as the rest of the client. SOCKS5 still covers the Web API but
 # not the engine: librespot only speaks HTTP CONNECT.
 librespot-core = { version = "0.8", default-features = false, features = ["rustls-tls-native-roots"] }
-librespot-playback = { version = "0.8", default-features = false, features = ["rustls-tls-native-roots"] }
+librespot-playback = { version = "0.8", default-features = false, features = ["pulseaudio-backend", "rustls-tls-native-roots"] }
 librespot-connect = { version = "0.8", default-features = false }
 librespot-metadata = { version = "0.8", default-features = false }
 librespot-protocol = { version = "0.8", default-features = false }
@@ -186,7 +186,6 @@ windows-sys = { version = "0.60", features = ["Win32_Foundation", "Win32_Globali
 [target.'cfg(target_os = "linux")'.dependencies]
 # Reuses the zbus/Tokio stack already used for desktop integration.
 zbus-secret-service-keyring-store = { version = "1.0.1", features = ["rt-tokio-crypto-rust"] }
-librespot-playback = { version = "0.8", default-features = false, features = ["pulseaudio-backend", "rustls-tls-native-roots"] }
 # The session bus, for the desktop's light or dark preference
 # (src/appearance.rs). fastframe-now-playing's MPRIS already compiles this
 # version.

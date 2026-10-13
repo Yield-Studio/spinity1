@@ -1064,7 +1064,7 @@ mod tests {
     /// A child with no window, for the parts that need none.
     fn headless_child() -> Child {
         let dir = std::env::temp_dir().join(format!(
-            "spotifast-milkdrop-child-{}-{}",
+            "spinity-milkdrop-child-{}-{}",
             std::process::id(),
             NEXT_RING.fetch_add(1, Ordering::Relaxed)
         ));

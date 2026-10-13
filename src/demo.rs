@@ -22,17 +22,17 @@ use crate::model::*;
 fn image(seed: u32) -> Vec<Image> {
     vec![
         Image {
-            url: format!("https://picsum.photos/seed/spotifast{seed}/640/640"),
+            url: format!("https://picsum.photos/seed/spinity{seed}/640/640"),
             width: Some(640),
             height: Some(640),
         },
         Image {
-            url: format!("https://picsum.photos/seed/spotifast{seed}/300/300"),
+            url: format!("https://picsum.photos/seed/spinity{seed}/300/300"),
             width: Some(300),
             height: Some(300),
         },
         Image {
-            url: format!("https://picsum.photos/seed/spotifast{seed}/64/64"),
+            url: format!("https://picsum.photos/seed/spinity{seed}/64/64"),
             width: Some(64),
             height: Some(64),
         },
@@ -560,7 +560,7 @@ pub fn populate(app: &mut App) {
     app.devices = vec![
         Device {
             id: Some("local-demo".into()),
-            name: "Spotifast".into(),
+            name: "Spinity".into(),
             is_active: false,
             is_restricted: false,
             volume_percent: Some(70),
@@ -942,7 +942,7 @@ pub fn apply_flags(app: &mut App, page: Option<&str>, show: Option<&str>) {
             "update" => {
                 app.update = Some(crate::updates::Release {
                     version: "0.7.1".into(),
-                    url: "https://spotifast.rocks/download/".into(),
+                    url: "https://github.com/Yield-Studio/spinity1/releases".into(),
                 });
             }
             "personal-app" => app.dialog = Some(Dialog::PersonalAppIntro),
@@ -1267,7 +1267,7 @@ mod tests {
 
     fn accessible_app(name: &str) -> (egui::Context, App) {
         let root =
-            std::env::temp_dir().join(format!("spotifast-a11y-{name}-{}", std::process::id()));
+            std::env::temp_dir().join(format!("spinity-a11y-{name}-{}", std::process::id()));
         let ctx = egui::Context::default();
         ctx.enable_accesskit();
         let waker = crate::backend::Waker::default();
@@ -2767,7 +2767,7 @@ mod tests {
             url: "https://example.invalid/release".into(),
         });
         let installation = Installation {
-            executable: std::path::PathBuf::from("/test/spotifast"),
+            executable: std::path::PathBuf::from("/test/spinity"),
             kind: Kind::Portable,
         };
         app.update_support = Some(Ok(installation.clone()));
@@ -4988,7 +4988,7 @@ mod tests {
             crate::ui::settings::show,
         );
         assert!(app.actions.iter().any(|action| matches!(action,
-            Action::OpenUrl(url) if url == "https://spotifast.rocks/settings-and-files/#custom-themes")));
+            Action::OpenUrl(url) if url == "https://github.com/Yield-Studio/spinity1/blob/main/docs/_reference/settings-and-files.md#custom-themes")));
         app.backend.shutdown();
     }
 
@@ -5596,7 +5596,7 @@ mod tests {
     #[test]
     fn a_toast_is_wide_enough_to_read() {
         let root =
-            std::env::temp_dir().join(format!("spotifast-toast-test-{}", std::process::id()));
+            std::env::temp_dir().join(format!("spinity-toast-test-{}", std::process::id()));
         let dirs = AppDirs {
             config: root.join("config"),
             state: root.join("state"),
@@ -5670,7 +5670,7 @@ mod tests {
     #[test]
     fn the_shortcuts_dialog_fits_a_small_window() {
         let root =
-            std::env::temp_dir().join(format!("spotifast-shortcuts-test-{}", std::process::id()));
+            std::env::temp_dir().join(format!("spinity-shortcuts-test-{}", std::process::id()));
         let dirs = AppDirs {
             config: root.join("config"),
             state: root.join("state"),
@@ -5723,7 +5723,7 @@ mod tests {
     #[test]
     fn interface_zoom_puts_minus_on_the_left() {
         let root =
-            std::env::temp_dir().join(format!("spotifast-zoom-order-test-{}", std::process::id()));
+            std::env::temp_dir().join(format!("spinity-zoom-order-test-{}", std::process::id()));
         let dirs = AppDirs {
             config: root.join("config"),
             state: root.join("state"),
@@ -5804,7 +5804,7 @@ mod tests {
     #[test]
     fn the_frame_rate_dial_steps_between_its_stops() {
         let root =
-            std::env::temp_dir().join(format!("spotifast-fps-dial-test-{}", std::process::id()));
+            std::env::temp_dir().join(format!("spinity-fps-dial-test-{}", std::process::id()));
         let dirs = AppDirs {
             config: root.join("config"),
             state: root.join("state"),
@@ -5885,7 +5885,7 @@ mod tests {
     #[test]
     fn the_narrowest_panels_keep_their_headers_on_one_row() {
         let root = std::env::temp_dir().join(format!(
-            "spotifast-queue-header-test-{}",
+            "spinity-queue-header-test-{}",
             std::process::id()
         ));
         let dirs = AppDirs {
@@ -5981,7 +5981,7 @@ mod tests {
     #[test]
     fn the_queue_names_where_the_song_plays_from() {
         let root = std::env::temp_dir().join(format!(
-            "spotifast-playing-from-test-{}",
+            "spinity-playing-from-test-{}",
             std::process::id()
         ));
         let dirs = AppDirs {
@@ -6233,7 +6233,7 @@ mod tests {
     #[test]
     fn fullscreen_lyrics_highlight_preserves_line_layout() {
         let root =
-            std::env::temp_dir().join(format!("spotifast-lyrics-layout-{}", std::process::id()));
+            std::env::temp_dir().join(format!("spinity-lyrics-layout-{}", std::process::id()));
         let ctx = egui::Context::default();
         let waker = crate::backend::Waker::default();
         waker.attach(&ctx);
@@ -6303,7 +6303,7 @@ mod tests {
     #[test]
     fn every_surface_renders_headless() {
         let root =
-            std::env::temp_dir().join(format!("spotifast-render-test-{}", std::process::id()));
+            std::env::temp_dir().join(format!("spinity-render-test-{}", std::process::id()));
         let dirs = AppDirs {
             config: root.join("config"),
             state: root.join("state"),
@@ -6421,7 +6421,7 @@ mod tests {
     #[test]
     fn a_long_virtual_queue_and_library_still_draw() {
         let root =
-            std::env::temp_dir().join(format!("spotifast-virtual-long-{}", std::process::id()));
+            std::env::temp_dir().join(format!("spinity-virtual-long-{}", std::process::id()));
         let dirs = AppDirs {
             config: root.join("config"),
             state: root.join("state"),
@@ -6487,7 +6487,7 @@ mod tests {
 
     fn drop_songs_on_sidebar(count: usize) {
         let root = std::env::temp_dir().join(format!(
-            "spotifast-drag-test-{}-{count}",
+            "spinity-drag-test-{}-{count}",
             std::process::id()
         ));
         let dirs = AppDirs {
@@ -6901,7 +6901,7 @@ mod tests {
     #[test]
     fn dragging_the_now_playing_song_supplies_a_playlist_row() {
         let root = std::env::temp_dir().join(format!(
-            "spotifast-now-playing-drag-test-{}",
+            "spinity-now-playing-drag-test-{}",
             std::process::id()
         ));
         let dirs = AppDirs {
@@ -7327,7 +7327,7 @@ mod tests {
         app.backend.shutdown();
     }
 
-    /// "Next up" plays from the current context, not from a list Spotifast
+    /// "Next up" plays from the current context, not from a list Spinity
     /// can rewrite, so it is never a drop target: dropping a queued row on
     /// it must not move or insert anything, even though the row sits inside
     /// the same scrollable list as "Playing next".
@@ -7833,7 +7833,7 @@ mod tests {
     #[test]
     fn dragging_within_the_pinned_block_reorders_it() {
         let root =
-            std::env::temp_dir().join(format!("spotifast-reorder-test-{}", std::process::id()));
+            std::env::temp_dir().join(format!("spinity-reorder-test-{}", std::process::id()));
         let dirs = AppDirs {
             config: root.join("config"),
             state: root.join("state"),
@@ -7911,7 +7911,7 @@ mod tests {
     #[test]
     fn dropping_between_unpinned_playlists_creates_the_custom_order() {
         let root =
-            std::env::temp_dir().join(format!("spotifast-unpinned-test-{}", std::process::id()));
+            std::env::temp_dir().join(format!("spinity-unpinned-test-{}", std::process::id()));
         let dirs = AppDirs {
             config: root.join("config"),
             state: root.join("state"),
@@ -8703,7 +8703,7 @@ mod tests {
     /// before asking the server.
     #[test]
     fn dragging_a_row_within_a_playlist_reorders_it() {
-        let root = std::env::temp_dir().join(format!("spotifast-move-test-{}", std::process::id()));
+        let root = std::env::temp_dir().join(format!("spinity-move-test-{}", std::process::id()));
         let dirs = AppDirs {
             config: root.join("config"),
             state: root.join("state"),
@@ -8992,7 +8992,7 @@ mod tests {
     #[test]
     fn clicking_search_in_library_shelf_focuses_search_field() {
         let root = std::env::temp_dir().join(format!(
-            "spotifast-sidebar-search-focus-test-{}",
+            "spinity-sidebar-search-focus-test-{}",
             std::process::id()
         ));
         let dirs = AppDirs {
@@ -9098,7 +9098,7 @@ mod tests {
                     Some("Update ready"),
                     DownloadState::Ready(Box::new(Prepared::sample(
                         Installation {
-                            executable: "/test/spotifast".into(),
+                            executable: "/test/spinity".into(),
                             kind: Kind::Portable,
                         },
                         "9.9.9",

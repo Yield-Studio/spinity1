@@ -1,8 +1,8 @@
 ﻿; The Windows installer, built with Inno Setup 6.3 or later from a release
 ; binary (the release workflow does this on every tag):
 ;
-;   iscc /DVersion=0.9.1 /DArch=x86_64 /DBinary=...\spotifast.exe ^
-;        /DOutputDir=dist packaging\windows\spotifast.iss
+;   iscc /DVersion=0.9.1 /DArch=x86_64 /DBinary=...\spinity.exe ^
+;        /DOutputDir=dist packaging\windows\spinity.iss
 ;
 ; Arch is x86_64 or aarch64, as in the Rust target triple, so the installer
 ; is named like the zip next to it. It needs no administrator rights: the
@@ -28,7 +28,7 @@
 #endif
 
 #define AppName "Spotifast"
-#define AppExeName "spotifast.exe"
+#define AppExeName "spinity.exe"
 #define AppIdentity "Spotifast"
 
 [Setup]
@@ -39,9 +39,9 @@ AppVersion={#Version}
 AppVerName={#AppName} {#Version}
 AppPublisher=Carmine Paolino
 AppCopyright=© 2026 Carmine Paolino
-AppPublisherURL=https://spotifast.rocks
-AppSupportURL=https://github.com/crmne/spotifast/issues
-AppUpdatesURL=https://spotifast.rocks/download/
+AppPublisherURL=https://spinity.rocks
+AppSupportURL=https://github.com/crmne/spinity/issues
+AppUpdatesURL=https://spinity.rocks/download/
 DefaultDirName={localappdata}\Programs\{#AppName}
 DefaultGroupName={#AppName}
 DisableProgramGroupPage=yes
@@ -51,8 +51,8 @@ ArchitecturesInstallIn64BitMode={#InnoArch}
 MinVersion=10.0
 LicenseFile=..\..\LICENSE
 OutputDir={#OutputDir}
-OutputBaseFilename=spotifast-v{#Version}-{#Arch}-pc-windows-msvc-setup
-SetupIconFile=spotifast.ico
+OutputBaseFilename=spinity-v{#Version}-{#Arch}-pc-windows-msvc-setup
+SetupIconFile=spinity.ico
 Compression=lzma2/max
 SolidCompression=yes
 WizardStyle=modern
@@ -75,7 +75,7 @@ Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription:
 Source: "{#Binary}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\README.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
-Source: "spotifast-installer.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "spinity-installer.txt"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{autoprograms}\{#AppName}"; Filename: "{app}\{#AppExeName}"

@@ -4,16 +4,16 @@
 //! is an original drawing in the app's dark palette.
 //!
 //! `cargo run --example default_skin` regenerates
-//! `assets/skins/spotifast.wsz`, a classic skin in every respect (BMPs in
+//! `assets/skins/spinity.wsz`, a classic skin in every respect (BMPs in
 //! a zip) that Winamp itself could wear. Add `--preview <png>` to also
 //! compose the main window at 2x through the same sprite and layout tables
 //! the app uses, as a check that the art lines up.
 
 use std::path::PathBuf;
 
-use spotifast::skin::layout::{self, Area};
-use spotifast::skin::sprites::{self, Sheet, Sprite};
-use spotifast::skin::{Skin, font, zip};
+use spinity::skin::layout::{self, Area};
+use spinity::skin::sprites::{self, Sheet, Sprite};
+use spinity::skin::{Skin, font, zip};
 
 type Rgb = [u8; 3];
 /// A box on a canvas: x, y, width, height.
@@ -919,7 +919,7 @@ fn preview(skin: &Skin) -> image::RgbaImage {
 }
 
 fn main() {
-    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("assets/skins/spotifast.wsz");
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("assets/skins/spinity.wsz");
     let sheets: [(Sheet, Canvas); 15] = [
         (Sheet::Main, main_sheet()),
         (Sheet::CButtons, cbuttons_sheet()),

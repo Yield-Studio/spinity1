@@ -1,6 +1,6 @@
-# Contributing to Spotifast
+# Contributing to Spinity
 
-Spotifast is a native Spotify client. Changes should improve the
+Spinity is a native Spotify client. Changes should improve the
 desktop app without adding a browser, fallback services, or another backend.
 
 ## Before opening an issue
@@ -16,13 +16,13 @@ project.
 Some boundaries come from Spotify or from upstream libraries:
 
 - Local playback requires Spotify Premium because librespot requires it.
-- Spotify Lossless is not available through librespot. Spotifast will
+- Spotify Lossless is not available through librespot. Spinity will
   reconsider it if librespot gains lawful upstream support; proposals that
   depend on bypassing Spotify's DRM are out of scope.
 - Spotify tracks must come from Spotify. Substituting audio from YouTube,
   Piped, `yt-dlp`, or another catalogue is out of scope.
-- Spotifast will not embed a browser engine, add telemetry, or introduce a
-  Spotifast-operated service.
+- Spinity will not embed a browser engine, add telemetry, or introduce a
+  Spinity-operated service.
 
 [What Spotify Lets a Client Do](docs/_reference/what-spotify-allows.md)
 lists what each of the three surfaces offers and the requests none of them
@@ -136,11 +136,10 @@ cargo test --locked --all-targets
 cargo test --locked --all-targets --all-features
 cargo test --locked --all-features --doc
 RUSTDOCFLAGS='-D warnings' cargo doc --locked --all-features --no-deps
-(cd docs && bundle exec jekyll build)
 ```
 
 Linux needs the development packages listed under
-[Build from source](https://spotifast.rocks/getting-started/#build-from-source); `nix develop`
+[Build from source](docs/_guide/getting-started.md#build-from-source); `nix develop`
 provides the complete development environment. The command compatibility test
 also needs `dbus-run-session`, to use a private bus instead of the desktop's.
 MilkDrop builds libprojectM
@@ -169,7 +168,7 @@ Translation changes also need `.github/scripts/update-translations.sh --check`,
 using GNU gettext tools with Rust support. Run the script without `--check` when
 translatable source strings change, and review any fuzzy or missing entries in
 the updated PO files. Normal Cargo builds compile the catalogs without gettext
-tools. See [Translating Spotifast](docs/_reference/translating.md) for the pilot
+tools. See [Translating Spinity](docs/_reference/translating.md) for the pilot
 scope and contributor workflow.
 
 Documentation deployments take their canonical URL from the domain configured

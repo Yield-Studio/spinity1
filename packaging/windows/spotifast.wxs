@@ -3,12 +3,12 @@
   The Windows Installer package (WiX Toolset 5), built from a release binary
   by build-msi.py (native-packages runs it on every tag):
 
-    python packaging\windows\build-msi.py PAYLOAD dist\spotifast.msi 1.2.3 amd64
+    python packaging\windows\build-msi.py PAYLOAD dist\spinity.msi 1.2.3 amd64
 
   It needs no administrator rights: Spotifast goes to the user's own
   Programs folder (%LOCALAPPDATA%\Programs\Spotifast) with a Start menu
   shortcut, an optional desktop shortcut and the spotify: links, as the Inno
-  Setup program (spotifast.iss) installed it. A running copy is closed before
+  Setup program (spinity.iss) installed it. A running copy is closed before
   an update replaces it, and uninstalling never leaves part of Spotifast
   behind while it runs (running-copy.c).
 
@@ -41,7 +41,7 @@
     <?define ProgramComponent = "{8EC6378E-B3EB-41F9-873B-01AE4466E5EE}" ?>
   <?endif?>
   <?ifndef InnoAppId ?>
-    <!-- spotifast.iss AppId, without Inno's doubled opening brace. -->
+    <!-- spinity.iss AppId, without Inno's doubled opening brace. -->
     <?define InnoAppId = "{FCED1EA0-EBF5-4C32-BA3B-A3AD724BACC3}" ?>
   <?endif?>
   <?define InnoUninstallKey = "Software\Microsoft\Windows\CurrentVersion\Uninstall\$(InnoAppId)_is1" ?>
@@ -71,11 +71,11 @@
     <Launch Condition="Installed OR NOT WINDOWSBUILD OR WINDOWSBUILD &gt;= 10240"
       Message="[ProductName] needs Windows 10 or later." />
 
-    <Icon Id="spotifast.ico" SourceFile="$(Icon)" />
-    <Property Id="ARPPRODUCTICON" Value="spotifast.ico" />
-    <Property Id="ARPURLINFOABOUT" Value="https://spotifast.rocks" />
-    <Property Id="ARPHELPLINK" Value="https://github.com/crmne/spotifast/issues" />
-    <Property Id="ARPURLUPDATEINFO" Value="https://spotifast.rocks/download/" />
+    <Icon Id="spinity.ico" SourceFile="$(Icon)" />
+    <Property Id="ARPPRODUCTICON" Value="spinity.ico" />
+    <Property Id="ARPURLINFOABOUT" Value="https://spinity.rocks" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/crmne/spinity/issues" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://spinity.rocks/download/" />
     <Property Id="ARPNOMODIFY" Value="1" />
     <Property Id="ARPNOREPAIR" Value="1" />
     <SetProperty Id="ARPINSTALLLOCATION" Value="[INSTALLFOLDER]" After="CostFinalize" Sequence="execute" />
@@ -155,16 +155,16 @@
     <ComponentGroup Id="Program" Directory="INSTALLFOLDER">
       <!-- A per-user component keeps its key path in HKCU. -->
       <Component Id="Program" Guid="$(ProgramComponent)">
-        <File Id="SpotifastExe" Source="$(Payload)\spotifast.exe" KeyPath="no" />
+        <File Id="SpotifastExe" Source="$(Payload)\spinity.exe" KeyPath="no" />
         <File Id="Readme" Source="$(Payload)\README.md" KeyPath="no" />
         <File Id="License" Source="$(Payload)\LICENSE" KeyPath="no" />
         <!-- Tells the updater a Windows installer put Spotifast here. -->
-        <File Id="InstallerMarker" Source="$(Payload)\spotifast-installer.txt" KeyPath="no" />
+        <File Id="InstallerMarker" Source="$(Payload)\spinity-installer.txt" KeyPath="no" />
         <RegistryValue Root="HKCU" Key="$(InstallerKey)" Name="InstallFolder" Type="string"
           Value="[INSTALLFOLDER]" KeyPath="yes" />
         <!--
           Only an empty folder goes. fastframe-update stages its helper and
-          the previous version in .spotifast-update-* inside this folder
+          the previous version in .spinity-update-* inside this folder
           while it runs the package, so never remove the folder's contents
           (no util:RemoveFolderEx here).
         -->

@@ -477,9 +477,9 @@ main{{max-width:28rem;padding:2.5rem;border-radius:1.25rem;background:#181b20;bo
 
 fn success_page() -> String {
     page(
-        "Signed in to Spotifast",
+        "Signed in to Spinity",
         "You're signed in",
-        "You can close this tab and go back to Spotifast.",
+        "You can close this tab and go back to Spinity.",
         "#1ed760",
     )
 }
@@ -488,7 +488,7 @@ fn failure_page(reason: &str) -> String {
     page(
         "Sign-in failed",
         "Sign-in didn't complete",
-        &format!("{reason}. Return to Spotifast and try again."),
+        &format!("{reason}. Return to Spinity and try again."),
         "#f5717f",
     )
 }
@@ -641,7 +641,7 @@ mod tests {
             ..token.clone()
         };
         assert!(expired.needs_refresh());
-        let dir = std::env::temp_dir().join(format!("spotifast-token-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("spinity-token-{}", std::process::id()));
         let path = dir.join("token.json");
         token.save(&path).unwrap();
         assert!(StoredToken::load(&path) == Some(token));
@@ -652,7 +652,7 @@ mod tests {
     #[test]
     fn legacy_tokens_move_to_the_matching_session() {
         let dir = std::env::temp_dir().join(format!(
-            "spotifast-token-migration-{}-{}",
+            "spinity-token-migration-{}-{}",
             std::process::id(),
             now_secs()
         ));
